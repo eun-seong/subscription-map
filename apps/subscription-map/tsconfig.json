@@ -3,6 +3,6 @@
   "compilerOptions": {
     "baseUrl": "./src"
   },
-  "include": ["next-env.d.ts", "environment.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "environment.d.ts", "types/*", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

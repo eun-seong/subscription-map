@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useRef, useState } from "react";
 import Script from "next/script";
+
 import { URL_VALUE } from "constants/index";
 
 export const NaverMapsContext = createContext<naver.maps.Map | undefined>(
@@ -15,7 +16,12 @@ export default function NaverMaps({ children }: React.PropsWithChildren) {
     const { naver } = window;
     if (!mapsRef.current || !naver) return;
 
-    const map = new naver.maps.Map(mapsRef.current);
+    const map = new naver.maps.Map(mapsRef.current, {
+      scaleControl: false,
+      logoControl: false,
+      mapDataControl: false,
+      zoomControl: true,
+    });
     setMaps(map);
   };
 
