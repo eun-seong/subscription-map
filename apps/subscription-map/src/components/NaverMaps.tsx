@@ -10,7 +10,6 @@ export const NaverMapsContext = createContext<naver.maps.Map | undefined>(
 export default function NaverMaps({ children }: React.PropsWithChildren) {
   const mapsRef = useRef(null);
   const [maps, setMaps] = useState<naver.maps.Map>();
-  console.log(maps)
 
   const initMap = () => {
     const { naver } = window;
@@ -20,7 +19,6 @@ export default function NaverMaps({ children }: React.PropsWithChildren) {
       scaleControl: false,
       logoControl: false,
       mapDataControl: false,
-      zoomControl: true,
     });
     setMaps(map);
   };
@@ -38,7 +36,7 @@ export default function NaverMaps({ children }: React.PropsWithChildren) {
       <div
         id="map"
         ref={mapsRef}
-        style={{ width: "100vw", height: "100vh" }}
+        style={{ width: "100vw", height: "100vh", overflow: "hidden" }}
       ></div>
       {children}
     </NaverMapsContext.Provider>

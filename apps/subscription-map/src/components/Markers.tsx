@@ -8,9 +8,13 @@ import SubscriptionInfoWindow from "./SubscriptionInfoWindow";
 
 interface Props {
   subscriptionLocations?: Array<SubscriptionInfo>;
+  onMarkerClick?: (info: SubscriptionInfo) => void;
 }
 
-export default function Markers({ subscriptionLocations }: Props) {
+export default function Markers({
+  subscriptionLocations,
+  onMarkerClick,
+}: Props) {
   const naverMaps = useContext(NaverMapsContext);
   const markers = useRef<naver.maps.Marker[]>([]);
   const listeners = useRef<naver.maps.MapEventListener[]>([]);
@@ -70,7 +74,7 @@ export default function Markers({ subscriptionLocations }: Props) {
         }),
         naver.maps.Event.addListener(marker, "click", (e) => {
           if (infoWindow.getMap()) {
-            console.log(e);
+            onMarkerClick?.(info);
           }
         })
       );
