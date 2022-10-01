@@ -1,20 +1,21 @@
 import { useContext, useEffect, useRef } from "react";
 import ReactDOMServer from "react-dom/server";
 
-import { SubscriptionInfo } from "types";
+import { SubscriptionData, Subscriptions } from "types";
 
 import { NaverMapsContext } from "components/NaverMaps";
 import SubscriptionInfoWindow from "./SubscriptionInfoWindow";
 
 interface Props {
-  subscriptionLocations?: Array<SubscriptionInfo>;
-  onMarkerClick?: (info: SubscriptionInfo) => void;
+  subscriptionLocations?: Subscriptions;
+  onMarkerClick?: (info: SubscriptionData) => void;
 }
 
 export default function Markers({
   subscriptionLocations,
   onMarkerClick,
 }: Props) {
+  console.log(subscriptionLocations);
   const naverMaps = useContext(NaverMapsContext);
   const markers = useRef<naver.maps.Marker[]>([]);
   const listeners = useRef<naver.maps.MapEventListener[]>([]);
@@ -42,22 +43,22 @@ export default function Markers({
   }
 
   function renderMarkers() {
-    if (!subscriptionLocations?.length || !naverMaps) return;
+    if (!subscriptionLocations || !naverMaps) return;
 
-    for (const info of subscriptionLocations) {
+    for (const [address, location] of Object.entries(subscriptionLocations)) {
       const marker = new naver.maps.Marker({
         map: naverMaps,
-        position: info.좌표,
+        position: location.좌표,
         icon: {
           url: "https://subscription-map.s3.ap-northeast-2.amazonaws.com/assets/house-icon-red.svg",
-          scaledSize: new naver.maps.Size(16, 16),
+          scaledSize: new naver.maps.Size(26, 26),
         },
         zIndex: 100,
       });
 
       const infoWindow = new naver.maps.InfoWindow({
         content: ReactDOMServer.renderToStaticMarkup(
-          <SubscriptionInfoWindow info={info} />
+          <SubscriptionInfoWindow info={location} />
         ),
         borderWidth: 0,
         backgroundColor: "rgba(0, 0, 0, 0)",
@@ -74,7 +75,7 @@ export default function Markers({
         }),
         naver.maps.Event.addListener(marker, "click", (e) => {
           if (infoWindow.getMap()) {
-            onMarkerClick?.(info);
+            onMarkerClick?.(location);
           }
         })
       );
@@ -82,7 +83,7 @@ export default function Markers({
   }
 
   useEffect(() => {
-    if (!subscriptionLocations?.length || !naverMaps) return;
+    if (!subscriptionLocations || !naverMaps) return;
 
     renderMarkers();
 

@@ -2,7 +2,7 @@ import { styled } from "@stitches/react";
 import { SubscriptionInfo } from "types";
 
 interface Props {
-  info: SubscriptionInfo;
+  info: Pick<SubscriptionInfo, "건물이름" | "주소">;
 }
 
 export default function SubscriptionInfoWindow({ info }: Props) {

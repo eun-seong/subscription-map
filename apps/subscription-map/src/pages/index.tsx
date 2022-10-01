@@ -1,33 +1,43 @@
 import { styled } from "@stitches/react";
 import { InferGetStaticPropsType } from "next";
+import { useSetRecoilState } from "recoil";
 
-import { SubscriptionInfo } from "types";
+import { SubscriptionData, SubscriptionInfo, Subscriptions } from "types";
+
+import selectedHouse from "recoil/selectedHouse";
 
 import Markers from "components/Markers";
 import NaverMaps from "components/NaverMaps";
 import SearchLeftSide from "components/SearchLeftSide";
+import SelectedHouseInfoRightSide from "components/SelectedHouseInfoRightSide";
 
 export default function Index({
   subscriptionLocations,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  function onMarkerClick(info: SubscriptionInfo) {}
+  const setSelectedHouse = useSetRecoilState(selectedHouse);
+
+  function onMarkerClick(info: SubscriptionData) {
+    setSelectedHouse(info);
+  }
+
   return (
     <Container>
-      <section>
+      <SearchLeftSide />
+      <div style={{ flex: 1, height: "100%" }}>
         <NaverMaps>
           <Markers
             subscriptionLocations={subscriptionLocations}
             onMarkerClick={onMarkerClick}
           />
         </NaverMaps>
-      </section>
-      <SearchLeftSide />
+      </div>
+      <SelectedHouseInfoRightSide />
     </Container>
   );
 }
 
 export async function getStaticProps() {
-  const subscriptionLocations: Array<SubscriptionInfo> = await fetch(
+  const subscriptionLocations: Subscriptions = await fetch(
     `http://localhost:3000/api/subscriptions/1`
   ).then((res) => res.json());
 
@@ -39,4 +49,5 @@ export async function getStaticProps() {
 const Container = styled("main", {
   position: "relative",
   display: "flex",
+  height: "100vh",
 });

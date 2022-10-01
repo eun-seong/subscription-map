@@ -1,6 +1,5 @@
-export type SubscriptionInfo = {
+export type SubscriptionXlsxData = {
   주소: string;
-  좌표: { x: number; y: number };
   동: string;
   호: string;
   건물이름: string;
@@ -20,11 +19,24 @@ export type SubscriptionInfo = {
         임대보증금: number;
         월임대료: number;
       };
-      보증금최대전환: {
+      보증금최대전환시: {
         임대보증금: number;
         전환율: number;
         월임대료: number;
       };
     }
   >;
+};
+
+export type SubscriptionInfo = SubscriptionXlsxData & {
+  좌표: { x: number; y: number };
+};
+
+export type Subscriptions = Record<string, SubscriptionData>;
+export type SubscriptionData = {
+  list: SubscriptionInfo[];
+  주소: string;
+  건물이름: string;
+  좌표: { x: number; y: number };
+  승강기: string;
 };

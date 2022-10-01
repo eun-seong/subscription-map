@@ -18,7 +18,7 @@ export type AddressItemV2 = {
     code: string;
     longName: string;
     shortName: string;
-    types:
+    types: Array<
       | "SIDO"
       | "SIGUGUN"
       | "RI"
@@ -26,7 +26,8 @@ export type AddressItemV2 = {
       | "BUILDING_NUMBER"
       | "BUILDING_NAME"
       | "LAND_NUMBER"
-      | "POSTAL_CODE";
+      | "POSTAL_CODE"
+    >;
   }>;
   x: string;
   y: string;
