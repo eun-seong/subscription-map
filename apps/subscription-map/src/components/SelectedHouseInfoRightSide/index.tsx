@@ -9,7 +9,7 @@ import CloseButton from "components/buttons/CloseButton";
 import HouseInfo from "./HouseInfo";
 
 import { ElevatorIcon, LocationIcon } from "ui/icons";
-import { Tag, IconDescription } from "ui/components";
+import { Tag, IconDescription, Divider } from "ui/components";
 
 export default function SelectedHouseInfoRightSide() {
   const [selectedHouse, setSelectedHouse] = useRecoilState(selectedHouseState);
@@ -26,8 +26,7 @@ export default function SelectedHouseInfoRightSide() {
       <Header>
         <Title>{selectedHouse.건물이름}</Title>
       </Header>
-      <Contents>
-        <Tag type="teal">총 {selectedHouse.list.length} 세대 공급</Tag>
+      <main>
         <IconDescription icon={<LocationIcon fill={colors.grey500} />}>
           {selectedHouse.주소}
         </IconDescription>
@@ -36,10 +35,14 @@ export default function SelectedHouseInfoRightSide() {
             {selectedHouse.승강기 ? "승강기 있음" : "승강기 없음"}
           </IconDescription>
         )}
+        <Divider />
+        <Tags>
+          <Tag type="teal">총 {selectedHouse.list.length} 세대 공급</Tag>
+        </Tags>
         {selectedHouse.list.map((house) => (
           <HouseInfo house={house} />
         ))}
-      </Contents>
+      </main>
     </SideMenuLayout>
   );
 }
@@ -67,4 +70,12 @@ const Icon = styled(CloseButton, {
     transition: "fill .1s ease",
   },
 });
-const Contents = styled("main", {});
+const Tags = styled("div", {
+  marginBottom: 10,
+  "&>*": {
+    marginRight: 5,
+    "&:last-child": {
+      marginRight: 0,
+    },
+  },
+});

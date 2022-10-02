@@ -57,9 +57,9 @@ const Container = styled("div", {
   overflow: "hidden",
   variants: {
     border: {
-      none: { border: `2px solid ${colors.greyOpacity200}` },
-      hover: { border: `2px solid ${colors.blue200}` },
-      focused: { border: `2px solid ${colors.blue500}` },
+      none: { border: `2px solid $greyOpacity200` },
+      hover: { border: `2px solid $blue200` },
+      focused: { border: `2px solid $blue500` },
     },
   },
 });
