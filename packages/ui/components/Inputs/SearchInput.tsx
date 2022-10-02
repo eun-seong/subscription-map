@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { styled } from "@stitches/react";
-import { useRef, useState } from "react";
-import colors from "ui/colors";
+
+import { colors } from "ui/styles";
 
 interface Props extends Partial<Omit<HTMLInputElement, "width" | "height">> {
   width?: number | string;

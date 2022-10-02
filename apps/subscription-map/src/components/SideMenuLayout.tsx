@@ -1,4 +1,4 @@
-import { styled } from "ui/theme";
+import { styled } from "ui/styles";
 
 const SideMenuLayout = styled("section", {
   boxSizing: "border-box",

@@ -1,7 +1,4 @@
-import { styled } from "@stitches/react";
-
-import colors from "ui/colors";
-import SearchInput from "ui/Inputs/SearchInput";
+import { SearchInput } from "ui/components";
 import SideMenuLayout from "./SideMenuLayout";
 
 export default function SearchLeftSide() {

@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "ui/theme";
+import { styled } from "ui/styles";
 
 interface Props {
   icon?: React.ReactNode;

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import colors from "ui/colors";
+
+import { colors } from "ui/styles";
 import { CloseIcon } from "ui/icons";
 
 export default function CloseButton(
