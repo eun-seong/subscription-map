@@ -20,13 +20,27 @@ export default function ExpandableList({
   const [expanded, setExpanded] = useState(defaultExpanded);
 
   function handleTitleClick() {
-    setExpanded((value) => !value);
+    setExpanded((value) => {
+      if (value) {
+        handleExtract();
+      } else {
+        handleExpand();
+      }
+      return !value;
+    });
+  }
+
+  function handleExpand() {
+    onExpand?.();
+  }
+  function handleExtract() {
+    onExtract?.();
   }
 
   return (
     <Container>
       <Title onClick={handleTitleClick}>
-        <div>{title}</div>
+        <div style={{ flex: 1, marginRight: 8 }}>{title}</div>
         <ExpandableIcon
           style={{ width: 26, height: 26 }}
           status={expanded ? "expanded" : "extracted"}

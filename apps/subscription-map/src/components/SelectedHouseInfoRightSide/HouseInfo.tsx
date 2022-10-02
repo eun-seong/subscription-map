@@ -11,17 +11,26 @@ export default function HouseInfo({ house }: Props) {
   return (
     <ExpandableList
       title={
-        <>
-          <Tags>
-            <Tag type="default">{house.공급형}</Tag>
-            <Tag type="red">{house.성별구분}</Tag>
-          </Tags>
-          {[
-            house.층수 && `${house.층수?.replace("층", "")}층`,
-            house.동 && `${house.동?.replace("동", "")}동`,
-            house.호 && `${house.호?.replace("호", "")}호`,
-          ].join(" ")}
-        </>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <div>
+            <Tags>
+              <Tag type="default">{house.공급형}</Tag>
+              <Tag type="red">{house.성별구분}</Tag>
+            </Tags>
+            {[
+              house.층수 && `${house.층수?.replace("층", "")}층`,
+              house.동 && `${house.동?.replace("동", "")}동`,
+              house.호 && `${house.호?.replace("호", "")}호`,
+            ].join(" ")}
+          </div>
+          <전용면적>{house.전용면적} m²</전용면적>
+        </div>
       }
     >
       <House>
@@ -67,8 +76,6 @@ export default function HouseInfo({ house }: Props) {
 
 const House = styled("div", {});
 const Tags = styled("span", {
-  margin: "8px 0",
-  marginLeft: 8,
   "&>*": {
     marginRight: 8,
     "&:last-child": {
@@ -82,4 +89,7 @@ const SubTitle = styled("div", {
   marginTop: 20,
   marginBottom: 10,
   color: "$grey900",
+});
+const 전용면적 = styled("div", {
+  fontSize: "0.9rem",
 });
