@@ -42,7 +42,12 @@ export default function ExpandableList({
       <Title onClick={handleTitleClick}>
         <div style={{ flex: 1, marginRight: 8 }}>{title}</div>
         <ExpandableIcon
-          style={{ width: 26, height: 26 }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            width: 12,
+            height: 12,
+          }}
           status={expanded ? "expanded" : "extracted"}
         >
           <TriangleDownIcon fill={colors.grey500} />
