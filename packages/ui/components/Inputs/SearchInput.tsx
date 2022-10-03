@@ -48,18 +48,40 @@ const Container = styled("div", {
   display: "flex",
   width: 200,
   alignItems: "center",
-  borderRadius: "10px",
   border: "none",
   outline: "none",
-  transition:
-    "background .2s ease, color .1s ease, box-shadow .2s ease, border .2s ease",
   height: "48px",
-  overflow: "hidden",
+  position: "relative",
+  "&::before": {
+    borderRadius: "10px",
+    overflow: "hidden",
+    transition:
+      "background .2s ease, color .1s ease, box-shadow .2s ease, border .2s ease",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    content: "",
+    pointerEvents: "none",
+  },
   variants: {
     border: {
-      none: { border: `2px solid $greyOpacity200` },
-      hover: { border: `2px solid $blue200` },
-      focused: { border: `2px solid $blue500` },
+      none: {
+        "&::before": {
+          boxShadow: `inset 0 0 0 1px ${colors.greyOpacity200}`,
+        },
+      },
+      hover: {
+        "&::before": {
+          boxShadow: `inset 0 0 0 2px ${colors.blue200}`,
+        },
+      },
+      focused: {
+        "&::before": {
+          boxShadow: `inset 0 0 0 2px ${colors.blue500}`,
+        },
+      },
     },
   },
 });

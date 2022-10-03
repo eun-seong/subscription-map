@@ -86,10 +86,15 @@ export const ElevatorIcon = ({ fill }: IconProps) => (
 );
 
 export const TriangleDownIcon = ({ fill }: IconProps) => (
-  <svg viewBox="0 0 24 24">
+  <svg viewBox="0 0 13 8" xmlns="http://www.w3.org/2000/svg">
     <path
-      d="M11.646 15.146L5.854 9.354a.5.5 0 01.353-.854h11.586a.5.5 0 01.353.854l-5.793 5.792a.5.5 0 01-.707 0z"
-      fill={fill}
+      stroke={fill}
+      strokeWidth="1.5"
+      d="M1 1l5.5 5.499L12 1"
+      fill="none"
+      fillRule="evenodd"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
