@@ -1,0 +1,43 @@
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "mysql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Subscription {
+  id                    Int       @id @default(autoincrement())
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  year                  Int
+  month                 Int
+  title                 String    @db.VarChar(255) @unique
+  fileUrl               String
+  houses                House[]
+}
+
+model House {
+  id                    Int           @id @default(autoincrement())
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  subscription          Subscription  @relation(fields: [subscriptionId], references: [id])
+  subscriptionId        Int
+  address               String
+  latitude              Float
+  longitude             Float
+  dong                  String?
+  ho                    String
+  buildingName          String
+  supplyType            String
+  genderType            String
+  netLeasableArea       Float
+  residentialCommonArea Float
+  areaSum               Float
+  numOfRoom             Int
+  floors                String
+  isElevator            Boolean
+  houseType             String
+  rentalTerms           Json
+}

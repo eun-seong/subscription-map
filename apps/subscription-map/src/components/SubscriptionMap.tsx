@@ -3,7 +3,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import selectedHouse from "recoil/selectedHouse";
 import selectedSubscription from "recoil/selectedSubscription";
 
-import { SubscriptionData } from "types";
+import { HousesByAddress } from "types";
 
 import Markers from "components/Markers";
 import NaverMaps from "components/NaverMaps";
@@ -12,7 +12,7 @@ export default function SubscriptionMap() {
   const subscriptionInfo = useRecoilValue(selectedSubscription);
   const setSelectedHouse = useSetRecoilState(selectedHouse);
 
-  function onMarkerClick(info: SubscriptionData) {
+  function onMarkerClick(info: HousesByAddress) {
     setSelectedHouse(info);
   }
 

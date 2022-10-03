@@ -1,7 +1,10 @@
+import React from "react";
 import { useSetRecoilState } from "recoil";
 import selectedSubscription from "recoil/selectedSubscription";
 
-import { Subscriptions, SubScriptionType } from "types";
+import { HouseInfo, LocationsByAddress, SubScriptionType } from "types";
+
+import { debounce } from "utils/utils";
 
 import { Select, SearchInput } from "ui/components";
 import SideMenuLayout from "./SideMenuLayout";
@@ -16,9 +19,30 @@ export default function SearchLeftSide({ subscriptionList }: Props) {
   function handleChange(id: number) {
     fetch(`http://localhost:3000/api/subscriptions/${id}`)
       .then((res) => res.json())
-      .then((data: Subscriptions) => {
-        setSubscription({ id, data });
+      .then((data: HouseInfo[]) => {
+        setSubscription({
+          id,
+          data: data.reduce((res, house) => {
+            return {
+              ...res,
+              [house.address]: {
+                address: house.address,
+                buildingName: house.buildingName,
+                isElevator: house.isElevator,
+                coordinate: {
+                  lat: +house.latitude,
+                  lon: +house.longitude,
+                },
+                list: [...(res?.[house.address]?.list || []), house],
+              },
+            };
+          }, {} as LocationsByAddress),
+        });
       });
+  }
+
+  function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
+    console.log(e?.target?.value);
   }
 
   return (
@@ -33,7 +57,11 @@ export default function SearchLeftSide({ subscriptionList }: Props) {
       >
         공고 선택
       </Select>
-      <SearchInput placeholder="주소 혹은 건물명을 입력하세요" width="100%" />
+      <SearchInput
+        placeholder="주소 혹은 건물명을 입력하세요"
+        width="100%"
+        onChange={debounce(handleSearchChange)}
+      />
     </SideMenuLayout>
   );
 }

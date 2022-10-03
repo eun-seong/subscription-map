@@ -24,8 +24,6 @@ export async function getStaticProps() {
     `http://localhost:3000/api/subscriptions`
   ).then((res) => res.json());
 
-  console.log("subscriptionList", subscriptionList);
-
   return {
     props: { subscriptionList },
   };

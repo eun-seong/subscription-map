@@ -1,17 +1,17 @@
-import { SubscriptionData } from "types";
+import { HousesByAddress } from "types";
 
 import { Tag } from "ui/components";
 import { styled } from "ui/styles";
 
 interface Props {
-  info: SubscriptionData;
+  info: HousesByAddress;
 }
 
 export default function SubscriptionInfoWindow({ info }: Props) {
   return (
     <Container>
-      <Title>{info.건물이름}</Title>
-      <Text>{info.주소}</Text>
+      <Title>{info.buildingName}</Title>
+      <Text>{info.address}</Text>
       <Tag type="teal">
         총 <b>{info.list.length}</b> 세대 공급
       </Tag>

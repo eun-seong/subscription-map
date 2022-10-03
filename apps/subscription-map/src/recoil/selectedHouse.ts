@@ -1,7 +1,7 @@
 import { atom } from "recoil";
-import { SubscriptionData } from "types";
+import { HousesByAddress } from "types";
 
-const selectedHouse = atom<SubscriptionData | null>({
+const selectedHouse = atom<HousesByAddress | null>({
   key: "selectedHouse",
   default: null,
 });

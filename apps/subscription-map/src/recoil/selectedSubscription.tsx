@@ -1,9 +1,10 @@
 import { atom } from "recoil";
-import { Subscriptions, SubScriptionType } from "types";
+import { LocationsByAddress, SubScriptionType } from "types";
 
 type Type = {
   id?: SubScriptionType["id"];
-  data?: Subscriptions;
+  data?: LocationsByAddress;
+  filter?: (data: LocationsByAddress) => LocationsByAddress | null;
 };
 
 const selectedSubscription = atom<Type>({

@@ -1,10 +1,10 @@
-import { SubscriptionInfo } from "types";
+import { HouseInfo as HouseInfoType } from "types";
 
 import { Descriptions, ExpandableList, Tag } from "ui/components";
 import { styled } from "ui/styles";
 
 interface Props {
-  house: SubscriptionInfo;
+  house: HouseInfoType;
 }
 
 export default function HouseInfo({ house }: Props) {
@@ -20,16 +20,16 @@ export default function HouseInfo({ house }: Props) {
         >
           <div>
             <Tags>
-              <Tag type="default">{house.공급형}</Tag>
-              <Tag type="red">{house.성별구분}</Tag>
+              <Tag type="default">{house.supplyType}</Tag>
+              <Tag type="red">{house.genderType}</Tag>
             </Tags>
             {[
-              house.층수 && `${house.층수?.replace("층", "")}층`,
-              house.동 && `${house.동?.replace("동", "")}동`,
-              house.호 && `${house.호?.replace("호", "")}호`,
+              house?.floors && `${house.floors?.replace("층", "")}층`,
+              house?.dong && `${house.dong?.replace("동", "")}동`,
+              house?.ho && `${house.ho?.replace("호", "")}호`,
             ].join(" ")}
           </div>
-          <전용면적>{house.전용면적} m²</전용면적>
+          <전용면적>{house.netLeasableArea} m²</전용면적>
         </div>
       }
     >
@@ -39,23 +39,24 @@ export default function HouseInfo({ house }: Props) {
           items={[
             {
               label: "주거공용면적",
-              content: house.주거공용면적,
+              content: house.residentialCommonArea,
               unit: "m²",
             },
             {
               label: "전용면적",
-              content: house.전용면적,
+              content: house.netLeasableArea,
               unit: "m²",
             },
-            { label: "면적계", content: house.면적계, unit: "m²" },
+            { label: "면적계", content: house.areaSum, unit: "m²" },
           ]}
         />
 
-        {Object.entries(house.순위별조건).map(([key, value]) => (
-          <>
-            <SubTitle>{key}순위 조건</SubTitle>
+        {Object.entries(house.rentalTerms).map(([key, value]) => (
+          <div key={key}>
+            <SubTitle>{key}</SubTitle>
             {Object.entries(value).map(([name, deposit]) => (
               <Descriptions
+                key={name}
                 title={name}
                 items={Object.entries(deposit).map(([label, content]) => ({
                   label,
@@ -67,7 +68,7 @@ export default function HouseInfo({ house }: Props) {
                 }))}
               />
             ))}
-          </>
+          </div>
         ))}
       </House>
     </ExpandableList>

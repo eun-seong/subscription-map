@@ -13,7 +13,6 @@ import { Tag, IconDescription, Divider } from "ui/components";
 
 export default function SelectedHouseInfoRightSide() {
   const [selectedHouse, setSelectedHouse] = useRecoilState(selectedHouseState);
-  console.log(selectedHouse);
 
   function handleCloseClick() {
     setSelectedHouse(null);
@@ -24,15 +23,15 @@ export default function SelectedHouseInfoRightSide() {
     <SideMenuLayout layoutPosition="right">
       <Icon onClick={handleCloseClick} />
       <Header>
-        <Title>{selectedHouse.건물이름}</Title>
+        <Title>{selectedHouse.buildingName}</Title>
       </Header>
       <main>
         <IconDescription icon={<LocationIcon fill={colors.grey500} />}>
-          {selectedHouse.주소}
+          {selectedHouse.address}
         </IconDescription>
-        {typeof selectedHouse.승강기 === "boolean" && (
+        {typeof selectedHouse.isElevator === "boolean" && (
           <IconDescription icon={<ElevatorIcon fill={colors.grey500} />}>
-            {selectedHouse.승강기 ? "승강기 있음" : "승강기 없음"}
+            {selectedHouse.isElevator ? "승강기 있음" : "승강기 없음"}
           </IconDescription>
         )}
         <Divider />
@@ -40,7 +39,7 @@ export default function SelectedHouseInfoRightSide() {
           <Tag type="teal">총 {selectedHouse.list.length} 세대 공급</Tag>
         </Tags>
         {selectedHouse.list.map((house) => (
-          <HouseInfo house={house} />
+          <HouseInfo key={house.id} house={house} />
         ))}
       </main>
     </SideMenuLayout>
