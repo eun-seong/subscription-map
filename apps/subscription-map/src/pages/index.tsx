@@ -1,48 +1,33 @@
 import { styled } from "@stitches/react";
-import { InferGetStaticPropsType } from "next";
-import { useSetRecoilState } from "recoil";
+import { InferGetServerSidePropsType } from "next";
 
-import { SubscriptionData, SubscriptionInfo, Subscriptions } from "types";
+import { SubScriptionType } from "types";
 
-import selectedHouse from "recoil/selectedHouse";
-
-import Markers from "components/Markers";
-import NaverMaps from "components/NaverMaps";
 import SearchLeftSide from "components/SearchLeftSide";
 import SelectedHouseInfoRightSide from "components/SelectedHouseInfoRightSide";
+import SubscriptionMap from "components/SubscriptionMap";
 
 export default function Index({
-  subscriptionLocations,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  const setSelectedHouse = useSetRecoilState(selectedHouse);
-
-  function onMarkerClick(info: SubscriptionData) {
-    setSelectedHouse(info);
-  }
-
+  subscriptionList,
+}: InferGetServerSidePropsType<typeof getStaticProps>) {
   return (
     <Container>
-      <SearchLeftSide />
-      <div style={{ flex: 1, height: "100%" }}>
-        <NaverMaps>
-          <Markers
-            subscriptionLocations={subscriptionLocations}
-            onMarkerClick={onMarkerClick}
-          />
-        </NaverMaps>
-      </div>
+      <SearchLeftSide subscriptionList={subscriptionList} />
+      <SubscriptionMap />
       <SelectedHouseInfoRightSide />
     </Container>
   );
 }
 
 export async function getStaticProps() {
-  const subscriptionLocations: Subscriptions = await fetch(
-    `http://localhost:3000/api/subscriptions/1`
+  const subscriptionList: SubScriptionType[] = await fetch(
+    `http://localhost:3000/api/subscriptions`
   ).then((res) => res.json());
 
+  console.log("subscriptionList", subscriptionList);
+
   return {
-    props: { subscriptionLocations }, // will be passed to the page component as props
+    props: { subscriptionList },
   };
 }
 

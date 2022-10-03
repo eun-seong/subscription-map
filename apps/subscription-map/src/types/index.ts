@@ -40,3 +40,11 @@ export type SubscriptionData = {
   좌표: { x: number; y: number };
   승강기: string;
 };
+
+export type SubScriptionType = {
+  id: number;
+  year: number;
+  month: number;
+  title: string;
+  url: string;
+};

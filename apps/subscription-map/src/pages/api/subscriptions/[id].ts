@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import XLSX from "xlsx";
 
+import { SubscriptionInfo, Subscriptions } from "types";
 import { AddressItemV2, NaverMapsDeocodingReponse } from "types/naverMaps";
-import env from "utils/env";
 import { URL_VALUE } from "constants/index";
-import { SubscriptionInfo, Subscriptions, SubscriptionXlsxData } from "types";
+import env from "utils/env";
 
 export default async function handler(
   req: NextApiRequest,

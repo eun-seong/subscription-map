@@ -1,8 +1,17 @@
 {
   "extends": "tsconfig/nextjs.json",
   "compilerOptions": {
-    "baseUrl": "./src"
+    "target": "es5",
+    "baseUrl": "./src",
   },
-  "include": ["next-env.d.ts", "environment.d.ts", "types/*", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "environment.d.ts",
+    "types/*",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
