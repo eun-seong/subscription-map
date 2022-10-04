@@ -22,7 +22,8 @@ export default function Index({
 export async function getStaticProps() {
   const subscriptionList: SubScriptionType[] = await fetch(
     `http://localhost:3000/api/subscriptions`
-  ).then((res) => res.json());
+  ).then((res) => {
+    return res.json();});
 
   return {
     props: { subscriptionList },

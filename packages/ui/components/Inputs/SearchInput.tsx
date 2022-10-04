@@ -1,9 +1,9 @@
-import { useState } from "react";
+import React, { HTMLAttributes, useState } from "react";
 import { styled } from "@stitches/react";
 
 import { colors } from "ui/styles";
 
-interface Props extends Partial<Omit<HTMLInputElement, "width" | "height">> {
+interface Props extends HTMLAttributes<HTMLInputElement> {
   width?: number | string;
 }
 
@@ -11,10 +11,12 @@ export default function SearchInput({ width, ...inputProps }: Props) {
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
 
-  function handleFocusInput() {
+  function handleFocusInput(e: React.FocusEvent<HTMLInputElement>) {
+    inputProps?.onFocus?.(e);
     setFocused(true);
   }
-  function handleBlurInput() {
+  function handleBlurInput(e: React.FocusEvent<HTMLInputElement>) {
+    inputProps?.onFocus?.(e);
     setFocused(false);
   }
   function handleMouseEnterInput() {

@@ -2,8 +2,8 @@
   "extends": "tsconfig/nextjs.json",
   "compilerOptions": {
     "baseUrl": "./src",
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "es2016",
+    "lib": ["dom", "dom.iterable", "esnext", "ES2016"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,

@@ -2,12 +2,17 @@ import React, { createContext, useEffect, useRef, useState } from "react";
 import Script from "next/script";
 
 import { URL_VALUE } from "constants/index";
+import env from "utils/env";
+
+interface Props {
+  children: React.ReactNode;
+}
 
 export const NaverMapsContext = createContext<naver.maps.Map | undefined>(
   undefined
 );
 
-export default function NaverMaps({ children }: React.PropsWithChildren) {
+export default function NaverMaps({ children }: Props) {
   const mapsRef = useRef(null);
   const [maps, setMaps] = useState<naver.maps.Map>();
 

@@ -3,6 +3,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
+      "env":  ["NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID", "NEXT_PUBLIC_NAVER_MAPS_CLIENT_SECRET"],
       "outputs": ["dist/**", ".next/**"]
     },
     "lint": {
@@ -11,5 +12,10 @@
     "dev": {
       "cache": false
     }
-  }
+  },
+  "globalDependencies": [
+    ".env", 
+    "tsconfig.json"
+  ],
+  "globalEnv": ["NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID", "NEXT_PUBLIC_NAVER_MAPS_CLIENT_SECRET"]
 }

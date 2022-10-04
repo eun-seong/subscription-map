@@ -51,6 +51,7 @@ export default function Options({
         ))}
       </List>
     </OptionsWrapper>,
+    // @ts-ignore
     document.querySelector("#__next")
   );
 }

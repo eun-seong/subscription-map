@@ -33,7 +33,8 @@ export default function Select({
   });
   const [selected, setSelected] = useState(defaultValue);
 
-  function handleOpen(e: React.MouseEvent) {
+  function handleOpen(e: React.MouseEvent<HTMLButtonElement>) {
+    // @ts-ignore
     const rect = e.target.closest("button").getBoundingClientRect();
     setOpenStatus((value) => ({
       opened: !value.opened,

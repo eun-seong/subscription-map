@@ -15,7 +15,7 @@ const Descriptions = ({ title, items }: Props) => {
     <Container>
       <Title>{title}</Title>
       {items.map((item) => (
-        <Item>
+        <Item key={item.label}>
           <Label>{item.label}</Label>
           <Content type={item?.unit ? "number" : "default"}>
             <div>{item.content}</div>

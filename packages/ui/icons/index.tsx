@@ -5,8 +5,8 @@ interface IconProps {
 export const CloseIcon = ({ fill }: IconProps) => (
   <svg
     viewBox="0 0 24 24"
-    shape-rendering="geometricPrecision"
-    text-rendering="geometricPrecision"
+    shapeRendering="geometricPrecision"
+    textRendering="geometricPrecision"
   >
     <g>
       <g>
