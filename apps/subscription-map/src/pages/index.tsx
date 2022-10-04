@@ -21,9 +21,10 @@ export default function Index({
 
 export async function getStaticProps() {
   const subscriptionList: SubScriptionType[] = await fetch(
-    `http://localhost:3000/api/subscriptions`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/subscriptions`
   ).then((res) => {
-    return res.json();});
+    return res.json();
+  });
 
   return {
     props: { subscriptionList },

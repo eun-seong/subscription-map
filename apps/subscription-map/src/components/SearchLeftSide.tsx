@@ -17,7 +17,7 @@ export default function SearchLeftSide({ subscriptionList }: Props) {
   const setSubscription = useSetRecoilState(selectedSubscription);
 
   function handleChange(id: number) {
-    fetch(`http://localhost:3000/api/subscriptions/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/subscriptions/${id}`)
       .then((res) => res.json())
       .then((data: HouseInfo[]) => {
         setSubscription({

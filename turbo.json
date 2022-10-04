@@ -4,10 +4,19 @@
     "prisma-gen": {
       "dependsOn": ["^prisma-gen"]
     },
+    "prisma-migrate": {
+      "dependsOn": ["prisma-gen", "^prisma-migrate"]
+    },
     "build": {
       "dependsOn": ["prisma-gen", "^build"],
-      "env":  ["NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID", "NEXT_PUBLIC_NAVER_MAPS_CLIENT_SECRET"],
+      "env":  ["NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID", "NEXT_PUBLIC_NAVER_MAPS_CLIENT_SECRET", "NEXT_PUBLIC_API_URL"],
       "outputs": ["dist/**", ".next/**"]
+    },
+    "subscription-map#build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [".next/**"]
     },
     "lint": {
       "outputs": []
@@ -20,5 +29,5 @@
   "globalDependencies": [
     ".env"
   ],
-  "globalEnv": ["NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID", "NEXT_PUBLIC_NAVER_MAPS_CLIENT_SECRET"]
+  "globalEnv": ["NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID", "NEXT_PUBLIC_NAVER_MAPS_CLIENT_SECRET", "NEXT_PUBLIC_API_URL"]
 }
